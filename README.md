@@ -1,14 +1,17 @@
 # Foreman
 
-[![Build Status](https://travis-ci.org/ddollar/foreman.svg?branch=master)](https://travis-ci.org/ddollar/foreman)
-[![Code Climate](https://codeclimate.com/github/ddollar/foreman.svg)](https://codeclimate.com/github/ddollar/foreman)
-[![Inline docs](http://inch-ci.org/github/ddollar/foreman.svg?branch=master)](http://inch-ci.org/github/ddollar/foreman)
+[![GitHub license](https://img.shields.io/github/license/jbox-web/foreman.svg)](https://github.com/jbox-web/foreman/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/jbox-web/foreman.svg?branch=master)](https://travis-ci.org/jbox-web/foreman)
+[![Code Climate](https://codeclimate.com/github/jbox-web/foreman/badges/gpa.svg)](https://codeclimate.com/github/jbox-web/foreman)
+[![Test Coverage](https://codeclimate.com/github/jbox-web/foreman/badges/coverage.svg)](https://codeclimate.com/github/jbox-web/foreman/coverage)
 
 Manage Procfile-based applications
 
 ## Installation
 
-    $ gem install foreman
+```sh
+$ gem install foreman
+```
 
 Ruby users should take care *not* to install foreman in their project's `Gemfile`.
 
@@ -46,9 +49,3 @@ David Dollar
 
 #### Patches contributed by
 [Contributor List](https://github.com/ddollar/foreman/contributors)
-
-## License
-
-Foreman is licensed under the MIT license.
-
-See LICENSE for the full license text.
