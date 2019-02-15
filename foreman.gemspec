@@ -1,21 +1,25 @@
-$:.unshift File.expand_path("../lib", __FILE__)
-require "foreman/version"
+# frozen_string_literal: true
 
-Gem::Specification.new do |gem|
-  gem.name     = "foreman"
-  gem.license  = "MIT"
-  gem.version  = Foreman::VERSION
+require_relative 'lib/foreman/version'
 
-  gem.author   = "David Dollar"
-  gem.email    = "ddollar@gmail.com"
-  gem.homepage = "http://github.com/ddollar/foreman"
-  gem.summary  = "Process manager for applications with multiple components"
+Gem::Specification.new do |s|
+  s.name        = 'foreman'
+  s.version     = Foreman::VERSION
+  s.platform    = Gem::Platform::RUBY
+  s.authors     = ['David Dollar']
+  s.email       = ['ddollar@gmail.com']
+  s.homepage    = 'https://github.com/jbox-web/foreman'
+  s.summary     = 'Process manager for applications with multiple components'
+  s.license     = 'MIT'
 
-  gem.description = gem.summary
+  s.files       = `git ls-files`.split("\n")
+  s.executables = ['foreman']
 
-  gem.executables = "foreman"
-  gem.files = Dir["**/*"].select { |d| d =~ %r{^(README|bin/|data/|ext/|lib/|spec/|test/)} }
-  gem.files << "man/foreman.1"
+  s.add_runtime_dependency 'thor', '>= 0.19.0', '< 2.0'
 
-  gem.add_dependency "thor", ">= 0.19.0", "< 2.0"
+  s.add_development_dependency 'fakefs'
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'timecop'
 end
