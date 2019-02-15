@@ -1,12 +1,13 @@
+require "shellwords"
+require "yaml"
+require "thor"
+
 require "foreman"
 require "foreman/helpers"
 require "foreman/engine"
 require "foreman/engine/cli"
 require "foreman/export"
 require "foreman/version"
-require "shellwords"
-require "yaml"
-require "thor"
 
 class Foreman::CLI < Thor
 
