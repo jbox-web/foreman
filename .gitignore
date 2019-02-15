@@ -1,7 +1,11 @@
+# Ignore bundler config.
 /.bundle
-/.env
+
+# Ignore Gemfile.lock
+/Gemfile.lock
+
+# Ignore test files
 /coverage
-/man/*.html
-/man/*.markdown
-/pkg/
-/vendor
+
+# Gem files
+/*.gem
