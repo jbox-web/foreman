@@ -12,6 +12,8 @@ Gem::Specification.new do |s|
   s.summary     = 'Process manager for applications with multiple components'
   s.license     = 'MIT'
 
+  s.required_ruby_version = '>= 2.4.0'
+
   s.files       = `git ls-files`.split("\n")
   s.executables = ['foreman']
 
