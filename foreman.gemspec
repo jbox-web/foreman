@@ -14,7 +14,9 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.4.0'
 
-  s.files       = `git ls-files`.split("\n")
+  s.files = `git ls-files`.split("\n")
+
+  s.bindir      = 'exe'
   s.executables = ['foreman']
 
   s.add_runtime_dependency 'dotenv'

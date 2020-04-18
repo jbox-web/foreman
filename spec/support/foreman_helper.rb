@@ -24,7 +24,7 @@ end
 
 def forked_foreman(args)
   rd, wr = make_pipe
-  Process.spawn("bundle exec bin/foreman #{args}", :out => wr, :err => wr)
+  Process.spawn("bundle exec exe/foreman #{args}", :out => wr, :err => wr)
   wr.close
   rd.read
 end
@@ -49,7 +49,7 @@ def fork_and_capture(&blk)
 end
 
 def fork_and_get_exitstatus(args)
-  pid = Process.spawn("bundle exec bin/foreman #{args}", :out => "/dev/null", :err => "/dev/null")
+  pid = Process.spawn("bundle exec exe/foreman #{args}", :out => "/dev/null", :err => "/dev/null")
   Process.wait(pid)
   $?.exitstatus
 end
