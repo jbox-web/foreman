@@ -1,0 +1,8 @@
+AllCops:
+  TargetRubyVersion: 2.5
+  Exclude:
+    - bin/*
+    - spec/**/*
+
+Style/Documentation:
+  Enabled: false
