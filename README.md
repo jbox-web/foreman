@@ -9,11 +9,21 @@ Manage Procfile-based applications
 
 ## Installation
 
-```sh
-$ gem install foreman
+Put this in your `Gemfile` :
+
+```ruby
+git_source(:github){ |repo_name| "https://github.com/#{repo_name}.git" }
+
+gem 'foreman', github: 'jbox-web/foreman'
 ```
 
-Ruby users should take care *not* to install foreman in their project's `Gemfile`.
+then run `bundle install`.
+
+You should add foreman binstub to your project :
+
+`bundle binstub foreman`
+
+Then you can call foreman like this: `bin/foreman start`.
 
 ## Getting Started
 
