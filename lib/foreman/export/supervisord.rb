@@ -1,8 +1,7 @@
-require "erb"
-require "foreman/export"
+require 'erb'
+require 'foreman/export'
 
 class Foreman::Export::Supervisord < Foreman::Export::Base
-
   def export
     super
 
@@ -10,7 +9,6 @@ class Foreman::Export::Supervisord < Foreman::Export::Base
       clean file
     end
 
-    write_template "supervisord/app.conf.erb", "#{app}.conf", binding
+    write_template 'supervisord/app.conf.erb', "#{app}.conf", binding
   end
-
 end

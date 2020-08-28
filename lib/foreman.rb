@@ -1,9 +1,10 @@
-require "foreman/version"
+# frozen_string_literal: true
+
+require 'foreman/version'
 
 module Foreman
-
   def self.runner
-    File.expand_path("../../exe/foreman-runner", __FILE__)
+    File.expand_path('../../exe/foreman-runner', __FILE__)
   end
 
   def self.ruby_18?
@@ -13,5 +14,4 @@ module Foreman
   def self.windows?
     defined?(RUBY_PLATFORM) and RUBY_PLATFORM =~ /(win|w)32$/
   end
-
 end

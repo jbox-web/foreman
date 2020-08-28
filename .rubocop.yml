@@ -6,3 +6,9 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false

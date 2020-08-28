@@ -1,9 +1,8 @@
-require "foreman/export"
+require 'foreman/export'
 
 class Foreman::Export::Inittab < Foreman::Export::Base
-
   def export
-    error("Must specify a location") unless location
+    error('Must specify a location') unless location
 
     inittab = []
     inittab << "# ----- foreman #{app} processes -----"
@@ -11,7 +10,7 @@ class Foreman::Export::Inittab < Foreman::Export::Base
     index = 1
     engine.each_process do |name, process|
       1.upto(engine.formation[name]) do |num|
-        id = app.slice(0, 2).upcase + sprintf("%02d", index)
+        id = app.slice(0, 2).upcase + sprintf('%02d', index)
         port = engine.port_for(process, num)
 
         commands = []
@@ -22,7 +21,7 @@ class Foreman::Export::Inittab < Foreman::Export::Base
         end
         commands << "#{process.command} >> #{log}/#{name}-#{num}.log 2>&1"
 
-        inittab << "#{id}:4:respawn:/bin/su - #{user} -c '#{commands.join(";")}'"
+        inittab << "#{id}:4:respawn:/bin/su - #{user} -c '#{commands.join(';')}'"
         index += 1
       end
     end
@@ -31,12 +30,11 @@ class Foreman::Export::Inittab < Foreman::Export::Base
 
     inittab = inittab.join("\n") + "\n"
 
-    if location == "-"
+    if location == '-'
       puts inittab
     else
       say "writing: #{location}"
-      File.open(location, "w") { |file| file.puts inittab }
+      File.open(location, 'w') { |file| file.puts inittab }
     end
   end
-
 end

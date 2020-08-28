@@ -1,8 +1,7 @@
-require "erb"
-require "foreman/export"
+require 'erb'
+require 'foreman/export'
 
 class Foreman::Export::Upstart < Foreman::Export::Base
-
   def export
     super
 
@@ -17,10 +16,11 @@ class Foreman::Export::Upstart < Foreman::Export::Base
 
       Dir[
         File.join(location, process_master_file),
-        File.join(location, process_file % "*")
+        File.join(location, process_file % '*')
       ].each { |f| clean(f) }
 
       next if engine.formation[name] < 1
+
       write_template process_master_template, process_master_file, binding
 
       1.upto(engine.formation[name]) do |num|
@@ -33,14 +33,14 @@ class Foreman::Export::Upstart < Foreman::Export::Base
   private
 
   def master_template
-    "upstart/master.conf.erb"
+    'upstart/master.conf.erb'
   end
 
   def process_master_template
-    "upstart/process_master.conf.erb"
+    'upstart/process_master.conf.erb'
   end
 
   def process_template
-    "upstart/process.conf.erb"
+    'upstart/process.conf.erb'
   end
 end

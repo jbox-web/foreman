@@ -2,13 +2,13 @@
 
 $stdout.sync = true
 
-%w( SIGINT SIGTERM ).each do |signal|
+%w(SIGINT SIGTERM).each do |signal|
   trap(signal) do
     puts "received #{signal} but i'm ignoring it!"
   end
 end
 
 while true
-  puts "tick: #{ARGV.inspect} -- FOO:#{ENV["FOO"]}"
+  puts "tick: #{ARGV.inspect} -- FOO:#{ENV['FOO']}"
   sleep 1
 end

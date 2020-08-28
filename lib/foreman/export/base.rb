@@ -1,10 +1,9 @@
-require "foreman/export"
-require "ostruct"
-require "pathname"
-require "shellwords"
+require 'foreman/export'
+require 'ostruct'
+require 'pathname'
+require 'shellwords'
 
 class Foreman::Export::Base
-
   attr_reader :location
   attr_reader :engine
   attr_reader :options
@@ -13,45 +12,22 @@ class Foreman::Export::Base
   # deprecated
   attr_reader :port
 
-  def initialize(location, engine, options={})
+  def initialize(location, engine, options = {})
     @location  = location
     @engine    = engine
     @options   = options.dup
     @formation = engine.formation
-
-    # deprecated
-    def port
-      Foreman::Export::Base.warn_deprecation!
-      engine.base_port
-    end
-
-    # deprecated
-    def template
-      Foreman::Export::Base.warn_deprecation!
-      options[:template]
-    end
-
-    # deprecated
-    def @engine.procfile
-      Foreman::Export::Base.warn_deprecation!
-      @processes.map do |process|
-        OpenStruct.new(
-          :name => @names[process],
-          :process => process
-        )
-      end
-    end
   end
 
   def export
-    error("Must specify a location") unless location
+    error('Must specify a location') unless location
     FileUtils.mkdir_p(location) rescue error("Could not create: #{location}")
     chown user, log
     chown user, run
   end
 
   def app
-    options[:app] || "app"
+    options[:app] || 'app'
   end
 
   def log
@@ -71,19 +47,20 @@ private ######################################################################
   def self.warn_deprecation!
     @@deprecation_warned ||= false
     return if @@deprecation_warned
-    puts "WARNING: Using deprecated exporter interface. Please update your exporter"
-    puts "the interface shown in the upstart exporter:"
+
+    puts 'WARNING: Using deprecated exporter interface. Please update your exporter'
+    puts 'the interface shown in the upstart exporter:'
     puts
-    puts "https://github.com/ddollar/foreman/blob/master/lib/foreman/export/upstart.rb"
-    puts "https://github.com/ddollar/foreman/blob/master/data/export/upstart/process.conf.erb"
+    puts 'https://github.com/ddollar/foreman/blob/master/lib/foreman/export/upstart.rb'
+    puts 'https://github.com/ddollar/foreman/blob/master/data/export/upstart/process.conf.erb'
     puts
     @@deprecation_warned = true
   end
 
-  def chown user, dir
+  def chown(user, dir)
     FileUtils.chown user, nil, dir
   rescue
-    error("Could not chown #{dir} to #{user}") unless File.writable?(dir) || ! File.exists?(dir)
+    error("Could not chown #{dir} to #{user}") unless File.writable?(dir) || ! File.exist?(dir)
   end
 
   def error(message)
@@ -91,17 +68,19 @@ private ######################################################################
   end
 
   def say(message)
-    puts "[foreman export] %s" % message
+    puts '[foreman export] %s' % message
   end
-  
+
   def clean(filename)
-    return unless File.exists?(filename)
+    return unless File.exist?(filename)
+
     say "cleaning up: #{filename}"
     FileUtils.rm(filename)
   end
 
   def clean_dir(dirname)
-    return unless File.exists?(dirname)
+    return unless File.exist?(dirname)
+
     say "cleaning up directory: #{dirname}"
     FileUtils.rm_r(dirname)
   end
@@ -114,23 +93,23 @@ private ######################################################################
   def old_export_template(exporter, file, template_root)
     if template_root && File.exist?(file_path = File.join(template_root, file))
       File.read(file_path)
-    elsif File.exist?(file_path = File.expand_path(File.join("~/.foreman/templates", file)))
+    elsif File.exist?(file_path = File.expand_path(File.join('~/.foreman/templates', file)))
       File.read(file_path)
     else
       File.read(File.expand_path("../../../../data/export/#{exporter}/#{file}", __FILE__))
     end
   end
 
-  def export_template(name, file=nil, template_root=nil)
+  def export_template(name, file = nil, template_root = nil)
     if file && template_root
       old_export_template name, file, template_root
     else
-      name_without_first = name.split("/")[1..-1].join("/")
+      name_without_first = name.split('/')[1..-1].join('/')
       matchers = []
       matchers << File.join(options[:template], name_without_first) if options[:template]
       matchers << File.expand_path("~/.foreman/templates/#{name}")
       matchers << File.expand_path("../../../../data/export/#{name}", __FILE__)
-      File.read(matchers.detect { |m| File.exists?(m) })
+      File.read(matchers.detect { |m| File.exist?(m) })
     end
   end
 
@@ -163,9 +142,8 @@ private ######################################################################
 
     filename = File.join(location, filename) unless Pathname.new(filename).absolute?
 
-    File.open(filename, "w") do |file|
+    File.open(filename, 'w') do |file|
       file.puts contents
     end
   end
-
 end
