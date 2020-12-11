@@ -1,7 +1,7 @@
 # Foreman
 
 [![GitHub license](https://img.shields.io/github/license/jbox-web/foreman.svg)](https://github.com/jbox-web/foreman/blob/master/LICENSE)
-[![Build Status](https://travis-ci.com/jbox-web/foreman.svg?branch=master)](https://travis-ci.com/jbox-web/foreman)
+[![CI](https://github.com/jbox-web/foreman/workflows/CI/badge.svg)](https://github.com/jbox-web/foreman/actions)
 [![Code Climate](https://codeclimate.com/github/jbox-web/foreman/badges/gpa.svg)](https://codeclimate.com/github/jbox-web/foreman)
 [![Test Coverage](https://codeclimate.com/github/jbox-web/foreman/badges/coverage.svg)](https://codeclimate.com/github/jbox-web/foreman/coverage)
 
