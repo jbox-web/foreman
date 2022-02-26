@@ -21,6 +21,7 @@ RSpec.configure do |config|
   config.after(:each) do
     FileUtils.rm_rf('/tmp')
   end
+  config.raise_errors_for_deprecations!
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
