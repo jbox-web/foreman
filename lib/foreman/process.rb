@@ -32,7 +32,7 @@ class Foreman::Process
     env.each do |key, val|
       expanded_command.gsub!("$#{key}", val)
     end
-    expanded_command
+    expanded_command.split(' ')
   end
 
   # Run a +Process+
@@ -48,7 +48,7 @@ class Foreman::Process
     env    = @options[:env].merge(options[:env] || {})
     output = options[:output] || $stdout
 
-    Process.spawn env, expanded_command(env), out: output, err: output, chdir: cwd
+    Process.spawn env, *expanded_command(env), out: output, err: output, chdir: cwd
   end
 
   # Exec a +Process+
@@ -62,7 +62,7 @@ class Foreman::Process
     env = @options[:env].merge(options[:env] || {})
     env.each { |k, v| ENV[k] = v }
     Dir.chdir(cwd)
-    Kernel.exec expanded_command(env)
+    Kernel.exec *expanded_command(env)
   end
 
   # Returns the working directory for this +Process+

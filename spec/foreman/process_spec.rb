@@ -46,12 +46,12 @@ describe Foreman::Process do
 
     it "can expand env in the command" do
       process = Foreman::Process.new("command $FOO $BAR", :env => { "FOO" => "bar" })
-      expect(process.expanded_command).to eq("command bar $BAR")
+      expect(process.expanded_command).to eq(["command", "bar", "$BAR"])
     end
 
     it "can expand extra env in the command" do
       process = Foreman::Process.new("command $FOO $BAR", :env => { "FOO" => "bar" })
-      expect(process.expanded_command("BAR" => "qux")).to eq("command bar qux")
+      expect(process.expanded_command("BAR" => "qux")).to eq(["command", "bar", "qux"])
     end
 
     it "can execute" do
@@ -61,7 +61,7 @@ describe Foreman::Process do
     end
 
     it "can execute with env" do
-      expect(Kernel).to receive(:exec).with("bin/command bar")
+      expect(Kernel).to receive(:exec).with(*["bin/command", "bar"])
       process = Foreman::Process.new("bin/command $FOO")
       process.exec(:env => { "FOO" => "bar" })
     end
