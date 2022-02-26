@@ -48,9 +48,7 @@ class Foreman::Process
     env    = @options[:env].merge(options[:env] || {})
     output = options[:output] || $stdout
 
-    Dir.chdir(cwd) do
-      Process.spawn env, expanded_command(env), out: output, err: output
-    end
+    Process.spawn env, expanded_command(env), out: output, err: output, chdir: cwd
   end
 
   # Exec a +Process+
