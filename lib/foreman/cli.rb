@@ -142,7 +142,7 @@ class Foreman::CLI < Thor
         engine.load_env file
       end
     else
-      default_env = File.join(engine.root, '.env')
+      default_env = File.join(engine.root, '.env.foreman')
       engine.load_env default_env if File.file?(default_env)
     end
   end
